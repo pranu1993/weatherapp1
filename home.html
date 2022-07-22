@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+    <title>Weather App</title>
+    <style>
+       body{
+        display:flex;
+        justify-content: center;
+        align-items: center;
+       }
+        .box{
+            background-color: rgb(144, 229, 232);
+            align-items: center;
+            height: 400px;
+            width:300px;
+            margin-top: 100px;
+            margin-bottom: 100px;
+            margin-left: 100px;
+            margin-right:100px;
+            border-color: #f1c40f;
+        }
+        .info{
+            margin-top: 100px;
+            text-align: center;
+          
+          
+            
+        }
+        .weathercon{
+            display: flex;
+            align-items: center;
+            align-self: auto;
+
+        }
+         
+    </style>
+</head>
+<body>
+    <div class="box">
+
+        
+        
+        <div class=" wave-one"></div>
+        <div class="wave-two"></div>
+        <div class="wave-three"></div>
+
+        <div class="weathercon">
+            <i class="fa-solid fa-sun" style="color:#f1c40f"></i>
+        </div>
+
+        
+        <div class="info"  >
+            
+             
+            <h2 class="location"><i class="fa-solid fa-street-view" style="color:rgb(235, 211, 61)"></i>{%location%},{%country%}</h2>
+            <p id="date">WED | JULY 13 | 2:00 PM</p>
+            <h1 class="temp"></i>{%tempval%}</h1>
+            <h3 class="tempmin_max">Min {%tempmin%} | Max {%tempmax%}</h3>
+        </div>
+
+
+    </div>
+    <script>
+        const curDate = document.getElementById("date");
+        let weathercon= document.getElementById("weathercon");
+
+        
+        const getCurrentDay = ()=>{
+            var weekday = new Array(7);
+            weekday[0]="Sunday";
+            weekday[1]="Monday";
+            weekday[2]="Tuesday";
+            weekday[3]="Wed";
+            weekday[4]="Thu";
+            weekday[5]="Fri";
+            weekday[6]="Sat";
+
+            let currentTime = new Date()
+           let day = (weekday[currentTime.getDay()]);
+           return day;
+        };
+        
+        const getCurrentTime= ()=>{
+            var months =[
+                "Jan",
+                "Feb",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "Aug",
+                "sep",
+                "Oct",
+                "Nov",
+                "Dec",
+            ];
+            var now = new Date();
+            var month =months[now.getMonth()  ];
+            var date = now.getDate();
+
+            let hours = now.getHours();
+            let mins = now.getMinutes();
+
+            let periods = "AM";
+            if (hours>11){
+                periods = "PM"
+                if(hours>12) hours -=12;
+            }
+            if(mins < 10){
+                mins = "0" + mins;
+            }
+           return `${month}${date} | ${hours}:${mins}${periods}`
+            
+        };
+        curDate.innerHTML = getCurrentDay() +  " | "  + getCurrentTime()
+
+        </script>
+</body>
+</html>
